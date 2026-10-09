@@ -1,0 +1,17 @@
+# Originais pesados (logo .png, foto .jpg) ficam fora do site
+originais/
+*.psd
+*.ai
+*.zip
+
+# Arquivos do sistema e da Vercel
+.DS_Store
+Thumbs.db
+desktop.ini
+.vercel
+.env*
+*.log
+
+# Ferramentas de edição
+.claude/
+.vscode/
