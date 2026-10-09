@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111210">
+  <meta name="description" content="Treinamento personalizado em Penápolis. Conheça a Move On e encontre um jeito de treinar que acompanha os seus objetivos.">
+  <title>Move On | Treino com direção em Penápolis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- A foto do topo é a primeira coisa que aparece: começa a baixar antes de tudo -->
+  <link rel="preload" as="image" href="fotos-usar/hero-academia-900.webp" media="(max-width: 600px)" fetchpriority="high">
+  <link rel="preload" as="image" href="fotos-usar/hero-academia.webp" media="(min-width: 601px)" fetchpriority="high">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111210'/%3E%3Cpath d='M12 43V20h7l13 14 13-14h7v23h-8V31L32 44 20 31v12z' fill='%2320bd39'/%3E%3C/svg%3E">
+  <style>
+    /* =========================================================
+       1. BASE
+       ========================================================= */
+    :root{
+      --dark:#111210;
+      --black:#101310;
+      --ink:#222420;
+      --lime:#20bd39;
+      --lime-hover:#42d257;
+      --green:#147b2a;
+      --paper:#f5f6f2;
+      --ease-out:cubic-bezier(.16,1,.3,1);
+      --ease-in-out:cubic-bezier(.65,0,.35,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    a:focus-visible{outline:3px solid var(--lime);outline-offset:5px}
+    img{max-width:100%}
+    section{scroll-margin-top:82px}
+
+    .wrap{width:min(100% - 64px,1320px);margin:auto}
+    .eyebrow{font-size:.82rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+    .section-label{color:#666a60}
+    .display{font-family:Oswald,Impact,sans-serif;text-transform:uppercase;font-weight:600;line-height:1.18;letter-spacing:-.018em}
+
+    .link-arrow{display:inline-block;width:16px;height:16px;vertical-align:-.16em;flex:none;transition:transform .35s var(--ease-out)}
+
+    /* Botão principal */
+    .button{display:inline-flex;align-items:center;gap:28px;background:var(--lime);color:var(--dark);padding:19px 23px;font-size:.84rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;transition:transform .3s var(--ease-out),background .2s;position:relative;overflow:hidden;isolation:isolate}
+    .button::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.18);transform:translateX(-101%);transition:transform .5s var(--ease-out);z-index:-1}
+    .button:hover{transform:translateY(-3px);background:var(--lime-hover)}
+    .button:hover::before{transform:translateX(0)}
+    .button:hover .link-arrow{transform:translate(3px,-3px)}
+    .button b{font-size:1.3rem;font-weight:400;line-height:.7}
+    .button .link-arrow{width:18px;height:18px}
+
+    /* Link sublinhado */
+    .line-link{display:inline-flex;gap:24px;align-items:center;padding:8px 0;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.83rem;position:relative}
+    .line-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:right;transition:transform .5s var(--ease-out)}
+    .line-link:hover::after{animation:line-swipe .7s var(--ease-out)}
+    .line-link:hover .link-arrow{transform:translate(3px,-3px)}
+    @keyframes line-swipe{0%{transform:scaleX(1);transform-origin:right}45%{transform:scaleX(0);transform-origin:right}46%{transform-origin:left}100%{transform:scaleX(1);transform-origin:left}}
+
+    /* Ícones sociais */
+    .social-icon{width:38px;height:38px;border:1px solid #596158;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:background .25s,color .25s,border-color .25s,transform .35s var(--ease-out)}
+    .social-icon:hover{transform:translateY(-2px) rotate(-6deg)}
+    .social-icon svg{width:19px;height:19px;display:block}
+
+    /* =========================================================
+       2. HEADER
+       ========================================================= */
+    .site-header{position:sticky;top:0;z-index:50;background:var(--black);color:#fff;border-bottom:1px solid #2f382f;transition:box-shadow .3s,background .3s}
+    .site-header.is-scrolled{background:rgba(16,19,16,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .head{min-height:82px;display:grid;grid-template-columns:180px 1fr auto;gap:28px;align-items:center}
+    .brand{display:block}
+    .brand img{display:block;width:166px;height:auto}
+    .nav{display:flex;justify-content:center;gap:clamp(14px,1.8vw,28px);color:#e9eee8;font-size:.88rem;font-weight:600}
+    .nav a{display:inline-block;white-space:nowrap;position:relative;padding:6px 0;transition:color .2s}
+    .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease-out)}
+    .nav a:hover{color:#50ce64}
+    .nav a:hover::after,.nav a.is-active::after{transform:scaleX(1);transform-origin:left}
+    .nav a.is-active{color:#50ce64}
+    .header-actions{display:flex;align-items:center;gap:10px}
+    .site-header .social-icon{border-color:#808b80;color:#f1f5ef}
+    .site-header .social-icon:hover{background:#fff;color:var(--black)}
+    .menu-toggle{display:none;border:0;background:transparent;width:39px;height:39px;padding:8px;cursor:pointer}
+    .menu-toggle span{display:block;height:2px;width:22px;background:#fff;margin:5px 0;transition:transform .35s var(--ease-out),opacity .2s}
+    .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+    .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* =========================================================
+       3. HERO
+       ========================================================= */
+    .hero{min-height:670px;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:url('fotos-usar/hero-academia.webp') center right/cover;transform-origin:70% 50%;will-change:transform}
+    .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#111210 3%,#111210f0 28%,#1112109a 58%,#1112103d 100%)}
+    .hero::after{content:"";position:absolute;inset:auto 0 0;height:110px;z-index:1;background:linear-gradient(transparent,#11121080)}
+    .hero-inner{position:relative;z-index:2;min-height:670px;display:flex;align-items:center;padding-top:75px;padding-bottom:80px}
+    .hero-inner>div{max-width:100%}
+    .hero .eyebrow{color:var(--lime);display:flex;align-items:center;gap:13px;font-size:.81rem}
+    .hero .eyebrow::before{content:"";height:2px;width:32px;background:var(--lime);transform-origin:left}
+    .hero h1{font-size:clamp(4.1rem,7vw,7.7rem);line-height:1.14;margin:30px 0 26px}
+    .hero h1 .line{display:block;overflow:hidden;padding-bottom:.04em;margin-bottom:-.04em}
+    .hero h1 .line>span{display:block;white-space:nowrap}
+    .hero h1 .accent{color:var(--lime)}
+    .hero-title-mobile{display:none}
+    .hero-copy{font-size:1.15rem;line-height:1.55;max-width:520px;color:#e0e1db;margin:0 0 28px}
+    .hero .button{font-size:.82rem;animation:btn-pulse 2.2s ease-out 2s infinite}
+    /* Pulso: um anel verde que se expande e some, mais uma leve "respirada" */
+    @keyframes btn-pulse{0%{box-shadow:0 0 0 0 rgba(32,189,57,.65);scale:1}15%{scale:1.03}30%{scale:1}70%{box-shadow:0 0 0 18px rgba(32,189,57,0)}100%{box-shadow:0 0 0 0 rgba(32,189,57,0);scale:1}}
+
+    /* =========================================================
+       4. TICKER
+       ========================================================= */
+    .ticker{background:var(--lime);color:#101810;overflow:hidden;white-space:nowrap;padding:14px 0;font-family:Oswald,Impact,sans-serif;text-transform:uppercase;font-size:1.15rem;font-weight:600;letter-spacing:.035em}
+    .ticker-track{display:flex;width:max-content;animation:ticker var(--ticker-dur,28s) linear infinite}
+    .ticker:hover .ticker-track{animation-play-state:paused}
+    .ticker-group{display:flex;align-items:center;flex:none}
+    .ticker-item{display:inline-flex;align-items:center;margin:0 26px;white-space:nowrap}
+    .ticker-separator{font-family:'DM Sans',Arial,sans-serif;font-size:1.12rem;font-weight:500;opacity:.75}
+    @keyframes ticker{to{transform:translateX(-50%)}}
+
+    /* =========================================================
+       5. SOBRE (INTRO)
+       ========================================================= */
+    .intro{background:#fff;padding:120px 0}
+    .intro-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:8%;align-items:center}
+    .intro-main h2{font-size:clamp(3.2rem,4.9vw,5.7rem);margin:28px 0 30px}
+    .intro-main p{font-size:1.05rem;line-height:1.7;max-width:460px;margin:0 0 14px}
+    .intro-main .line-link{margin-top:16px}
+    .real-image{margin:0;position:relative}
+    .real-image .img-frame{overflow:hidden}
+    .real-image img{display:block;width:100%;height:430px;object-fit:cover;object-position:center;filter:grayscale(.15) contrast(1.04);transition:transform 1.2s var(--ease-out),filter .6s}
+    .real-image:hover img{transform:scale(1.03);filter:grayscale(0) contrast(1.04)}
+    .real-image::after{content:"";position:absolute;left:0;bottom:-12px;width:75px;height:3px;background:var(--lime);transform-origin:left}
+
+    /* =========================================================
+       6. DIFERENCIAIS (EXPERIENCE)
+       ========================================================= */
+    .experience{background:var(--dark);color:#fff;padding:125px 0 135px}
+    .experience-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:10%}
+    .experience-head h2{font-size:clamp(4.2rem,6.6vw,7.4rem);margin:40px 0 30px}
+    .experience-head h2 .hl{color:var(--lime)}
+    .experience-head>p{font-size:1.1rem;line-height:1.7;color:#bec5bb;max-width:380px}
+    .service-list{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;margin-top:32px;max-width:440px}
+    .service-list span{display:flex;align-items:center;gap:12px;border-top:1px solid #566458;padding:13px 0;font-size:.94rem;color:#e7ebe5}
+    .service-list span::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(32,189,57,.6)}
+    .service-list span:hover::before{animation:dot-pulse 1s var(--ease-out)}
+    @keyframes dot-pulse{to{box-shadow:0 0 0 8px rgba(32,189,57,0)}}
+    .features{padding-top:8px}
+    .feature{display:grid;grid-template-columns:48px 1fr;gap:18px;padding:28px 0 34px;position:relative}
+    .feature::before,.feature:first-child::after{content:"";position:absolute;left:0;right:0;height:1px;background:#526052;transform-origin:left}
+    .feature::before{bottom:0}
+    .feature:first-child::after{top:0}
+    .feature .number{color:var(--lime);font-family:Oswald,sans-serif;font-size:1rem;transition:transform .4s var(--ease-out)}
+    .feature h3{font-family:Oswald,Impact,sans-serif;font-size:clamp(1.8rem,2.5vw,2.7rem);text-transform:uppercase;line-height:1.1;margin:0 0 10px;transition:transform .4s var(--ease-out),color .3s}
+    .feature p{color:#bdbfb6;line-height:1.6;margin:0;max-width:440px}
+    .feature:hover h3{transform:translateX(8px);color:var(--lime)}
+    .feature:hover .number{transform:translateY(-3px)}
+
+    /* =========================================================
+       7. OBJETIVOS (PLANS)
+       ========================================================= */
+    .plans{background:var(--paper);padding:120px 0}
+    .plan-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:10%;align-items:start}
+    /* Fixada: a seção fica parada na tela enquanto a rolagem abre um card de cada vez */
+    .plans.is-pinned{padding:0;height:calc(100vh - 82px + 180vh)}
+    .plans.is-pinned .plans-sticky{position:sticky;top:82px;height:calc(100vh - 82px);display:flex;align-items:center;overflow:hidden}
+    .plan-list{position:relative}
+    .plan-list::before{content:"";position:absolute;left:0;top:-1px;height:2px;width:calc(var(--p,0) * 100%);background:var(--green);transition:width .15s linear}
+    .plan-intro h2{font-size:clamp(2.6rem,3.4vw,4.4rem);margin:28px 0 30px}
+    @media(min-width:851px){.plan-intro h2 .ln>span{white-space:nowrap}}
+    .plan-intro p{font-size:1.06rem;line-height:1.7;max-width:390px}
+    .plan-intro .line-link{margin-top:18px}
+    .plan-list{display:flex;flex-direction:column;border-top:1px solid #c2c9bf;--acc:.55s cubic-bezier(.65,0,.35,1)}
+    /* Todas as transições usam o mesmo tempo: enquanto um card abre e o outro fecha,
+       a altura total da lista fica igual, então nada "pula" embaixo do mouse. */
+    .plan-row{border-bottom:1px solid #c2c9bf;border-radius:2px;transition:background var(--acc),color var(--acc),margin var(--acc),padding var(--acc),border-color var(--acc)}
+    .plan-head{display:grid;grid-template-columns:35px 1fr 30px;align-items:center;gap:20px;width:100%;padding:24px 0;margin:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:padding var(--acc)}
+    .plan-head:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+    .plan-number{font-size:.8rem;font-weight:700;letter-spacing:.1em;color:#626b62;transition:color var(--acc)}
+    .plan-name{font-size:clamp(1.1rem,1.55vw,1.55rem);font-weight:700;line-height:1.35;letter-spacing:-.02em;transition:color .3s,transform .4s var(--ease-out)}
+    .plan-row:not(.is-open) .plan-head:hover .plan-name{color:#127a28;transform:translateX(6px)}
+    .plus{position:relative;display:block;width:20px;height:20px;justify-self:center;color:#167b2a;transition:color var(--acc),transform var(--acc)}
+    .plus::before,.plus::after{content:"";position:absolute;left:3px;top:9px;width:14px;height:1.7px;border-radius:2px;background:currentColor;transition:transform var(--acc)}
+    .plus::after{transform:rotate(90deg)}
+    .plan-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--acc)}
+    .plan-clip{overflow:hidden;min-height:0}
+    .plan-detail{padding:0 38px 29px 55px;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .4s var(--ease-out)}
+    .plan-detail p{font-size:.96rem;line-height:1.65;color:inherit;margin:0 0 12px;max-width:465px}
+    .plan-detail a{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid currentColor;padding-bottom:5px;white-space:nowrap}
+    .plan-detail a:hover .link-arrow{transform:translate(3px,-3px)}
+    .goal-link .link-arrow{width:14px;height:14px}
+    /* Aberto */
+    .plan-row.is-open{background:var(--green);color:#fff;border-color:var(--green);margin:14px -24px;padding:0 24px}
+    .plan-row.is-open .plan-head{padding-bottom:19px}
+    .plan-row.is-open .plan-number{color:#fff}
+    .plan-row.is-open .plus{color:#fff;transform:rotate(180deg)}
+    .plan-row.is-open .plus::after{transform:rotate(0)}
+    .plan-row.is-open .plan-body{grid-template-rows:1fr}
+    .plan-row.is-open .plan-detail{opacity:1;transform:none;transition:opacity .4s .15s,transform .5s .15s var(--ease-out)}
+    .plan-row.is-open .plan-head:focus-visible{outline-color:#fff;outline-offset:-4px}
+    .plan-footnote{font-size:.82rem;color:#61665a;margin:22px 0 0}
+
+    /* =========================================================
+       8. AULA EXPERIMENTAL (SCHEDULE)
+       ========================================================= */
+    .schedule{background:#fff;color:var(--ink);padding:115px 0 85px}
+    .booking-head{display:grid;grid-template-columns:1fr .75fr;gap:12%;align-items:end;margin-bottom:48px}
+    .booking-head h2{font-size:clamp(3.1rem,4.6vw,5.6rem);margin:27px 0 8px}
+    .booking-head p{font-size:1.08rem;line-height:1.65;max-width:440px;margin:0 0 7px}
+    .schedule-form{display:grid;grid-template-columns:1fr 1.35fr 1fr;border-top:1px solid #bac4b8;border-bottom:1px solid #bac4b8}
+    .booking-field{padding:30px 26px 34px 0;min-width:0}
+    .booking-field+.booking-field{border-left:1px solid #d4dbd2;padding-left:27px}
+    .form-step{display:flex;gap:16px;align-items:center;margin:0 0 26px;color:#198d32;font-size:.8rem;font-weight:700;letter-spacing:.08em}
+    .form-step span{font-size:.8rem;color:#5c685b;text-transform:uppercase;letter-spacing:.08em}
+    .field-label{display:block;font-weight:700;font-size:.94rem;margin:0 0 15px}
+    fieldset{padding:0;border:0;margin:0}
+    select{width:100%;background:#fff;border:1px solid #c4cec2;color:var(--ink);padding:13px 12px;font:inherit;font-size:.94rem;border-radius:0;transition:border-color .2s,box-shadow .2s;cursor:pointer}
+    select:hover{border-color:#8fa08c}
+    select:focus-visible{outline:none;border-color:#168c30;box-shadow:0 0 0 3px rgba(32,189,57,.25)}
+    .booking-field.is-done .form-step{color:#127a28}
+    .form-step .check{width:16px;height:16px;margin-left:auto;color:#168c30;opacity:0;transform:scale(.4);transition:opacity .25s,transform .4s var(--ease-out)}
+    .booking-field.is-done .check{opacity:1;transform:scale(1)}
+    .day-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+    .day-grid label{position:relative;text-align:center}
+    .day-grid input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+    .day-grid span{display:block;border:1px solid #c2cec0;border-radius:3px;padding:10px 5px;font-size:.81rem;font-weight:700;background:#fff;color:var(--ink);cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .3s var(--ease-out)}
+    .day-grid label:hover span{border-color:#8fa08c}
+    .day-grid input:checked+span{background:#cbe9d1;border-color:#127a28;color:#0c3f18;animation:chip-pop .35s var(--ease-out)}
+    .day-grid input:focus-visible+span{outline:3px solid #177d2d;outline-offset:3px}
+    @keyframes chip-pop{50%{transform:scale(1.08)}}
+    .day-grid.shake{animation:shake .45s}
+    @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+    .booking-action{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:30px;border-top:1px solid #d4dbd2;padding:22px 0}
+    .booking-action p{font-size:.88rem;line-height:1.5;color:#5d685d;margin:0}
+    .booking-action p.is-error{color:#b3261e;font-weight:600}
+    .schedule-form .button{background:var(--lime);color:var(--dark);border:0;cursor:pointer;min-width:250px;justify-content:space-between;white-space:nowrap;animation:btn-pulse 2.2s ease-out 2s infinite}
+    .schedule-form .button:hover{background:var(--lime-hover)}
+
+    /* =========================================================
+       9. LOCALIZAÇÃO
+       ========================================================= */
+    .location-section{background:var(--paper);padding:108px 0 118px}
+    .location-heading{display:grid;grid-template-columns:1fr .7fr;align-items:end;gap:10%;margin-bottom:43px}
+    .location-heading h2{font-size:clamp(2.9rem,4.4vw,5.2rem);margin:26px 0 5px}
+    .location-heading p{font-size:1.05rem;line-height:1.7;max-width:390px;margin:0 0 9px;color:#4b554b}
+    .location-layout{display:grid;grid-template-columns:1.15fr .85fr;background:#fff;border:1px solid #dce3da;min-height:475px}
+    .location-map{min-height:475px;background:#e8ebe6}
+    .location-map iframe{display:block;width:100%;height:100%;min-height:475px;border:0;filter:grayscale(.38)}
+    .location-info{padding:35px clamp(28px,3vw,54px);display:flex;flex-direction:column;justify-content:space-between}
+    .location-kicker{font-size:.7rem;letter-spacing:.13em;font-weight:700;color:#167a2a}
+    .location-address address{font-size:1.12rem;font-style:normal;font-weight:600;line-height:1.6;margin:13px 0 20px}
+    .location-route{display:inline-flex;align-items:center;gap:22px;padding-bottom:6px;border-bottom:1px solid #151d15;font-size:.88rem;font-weight:700;transition:color .2s,border-color .2s}
+    .location-route:hover{color:#12792a;border-color:#12792a}
+    .location-route:hover .link-arrow{transform:translate(3px,-3px)}
+    .location-hours{margin-top:35px}
+    .location-hours h3{font-size:.9rem;margin:0 0 12px}
+    .location-hours dl{margin:0}
+    .location-hours dl>div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid #e6ebe4;font-size:.8rem}
+    .location-hours dt{color:#566056}
+    .location-hours dd{margin:0;font-weight:600;white-space:nowrap}
+    .hours-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+    .hours-head h3{margin:0}
+    .hours-status{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:700;padding:5px 10px;border-radius:40px;background:#eef0ec;color:#5b635a;white-space:nowrap}
+    .hours-status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+    .hours-status.is-open{background:#e3f4e6;color:#127a28}
+    .hours-status.is-open::before{animation:open-pulse 1.8s ease-out infinite}
+    @keyframes open-pulse{0%{box-shadow:0 0 0 0 rgba(18,122,40,.45)}100%{box-shadow:0 0 0 7px rgba(18,122,40,0)}}
+    .location-hours dl>div.is-today{background:#eef7ef;margin:0 -10px;padding:7px 10px;border-top-color:transparent;border-radius:2px;box-shadow:inset 3px 0 0 var(--green)}
+    .location-hours dl>div.is-today+div{border-top-color:transparent}
+    .location-hours .is-today dt,.location-hours .is-today dd{color:#0f5a20;font-weight:700}
+    .location-hours .is-today dt::after{content:" · hoje";font-weight:500;color:#127a28}
+
+    /* =========================================================
+       10. FOOTER
+       ========================================================= */
+    .site-footer{background:var(--black);color:#e6ebe5;padding:75px 0 0}
+    .footer-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:7%;padding-bottom:63px}
+    .footer-about .brand img{width:178px}
+    .footer-about p{font-size:.95rem;line-height:1.65;color:#c9cec7;max-width:255px;margin:20px 0 24px}
+    .footer-social{display:flex;align-items:center;gap:10px}
+    .footer-social .social-icon{border-color:#898f87}
+    .footer-social .social-icon:hover{background:var(--lime);border-color:var(--lime);color:#fff}
+    .footer-column h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:#fff;margin:9px 0 24px}
+    .footer-column ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+    .footer-column li{font-size:.92rem;line-height:1.5;color:#cbd0c9}
+    .footer-column a{transition:color .2s}
+    .footer-column a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+    .footer-bottom{border-top:1px solid #4a5049;padding:21px 0;display:flex;justify-content:space-between;gap:25px;color:#aeb6ac;font-size:.8rem}
+    .footer-bottom a{transition:color .2s}
+    .footer-bottom a:hover{color:#fff}
+    .footer-bottom a:hover .link-arrow{transform:translateY(-3px)}
+    .footer-bottom .link-arrow{margin-left:5px}
+
+    /* =========================================================
+       11. ANIMAÇÕES DE ENTRADA
+       Só ativam quando o JS carrega (classe .js no <html>),
+       então o conteúdo nunca fica escondido sem JavaScript.
+       ========================================================= */
+    /* Hero: entra ao carregar a página */
+    .js .hero-bg{animation:hero-zoom 2.4s var(--ease-out) both}
+    .js .hero .eyebrow{animation:fade-up .9s var(--ease-out) .15s both}
+    .js .hero .eyebrow::before{animation:grow-x .9s var(--ease-out) .35s both}
+    .js .hero h1 .line>span{animation:line-up 1.1s var(--ease-out) both}
+    .js .hero h1 .line:nth-child(1)>span{animation-delay:.3s}
+    .js .hero h1 .line:nth-child(2)>span{animation-delay:.42s}
+    .js .hero h1 .line:nth-child(3)>span{animation-delay:.54s}
+    .js .hero-copy{animation:fade-up 1s var(--ease-out) .75s both}
+    .js .hero .button{animation:fade-up 1s var(--ease-out) .9s both,btn-pulse 2.2s ease-out 2s infinite}
+    @keyframes hero-zoom{from{transform:scale(1.12);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+    @keyframes line-up{from{transform:translateY(105%)}to{transform:none}}
+    @keyframes grow-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+    /* Revelar ao rolar */
+    .js [data-reveal]{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);transition-delay:var(--d,0s)}
+    .js [data-reveal="left"]{transform:translateX(-32px)}
+    .js [data-reveal].is-in{opacity:1;transform:none}
+
+    /* Títulos: cada linha sobe por trás de uma máscara */
+    .js .split .ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+    .js .split .ln>span{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease-out);transition-delay:calc(var(--i,0) * .1s + .1s)}
+    .js .split.is-in .ln>span{transform:none}
+
+    /* Imagem: cortina abrindo */
+    .js .real-image .img-frame{clip-path:inset(0 100% 0 0);transition:clip-path 1.3s var(--ease-in-out)}
+    .js .real-image .img-frame img{transform:scale(1.15);transition:transform 1.6s var(--ease-out),filter .6s}
+    .js .real-image.is-in .img-frame{clip-path:inset(0 0 0 0)}
+    .js .real-image.is-in .img-frame img{transform:scale(1)}
+    .js .real-image.is-in:hover .img-frame img{transform:scale(1.03)}
+    .js .real-image::after{transform:scaleX(0);transition:transform .9s var(--ease-out) 1s}
+    .js .real-image.is-in::after{transform:scaleX(1)}
+
+    /* Diferenciais: linhas se desenham */
+    .js .feature::before,.js .feature:first-child::after{transform:scaleX(0);transition:transform 1.1s var(--ease-in-out);transition-delay:var(--d,0s)}
+    .js .feature.is-in::before,.js .feature.is-in:first-child::after{transform:scaleX(1)}
+
+    /* =========================================================
+       12. RESPONSIVO
+       ========================================================= */
+    @media(max-width:1100px){
+      .head{grid-template-columns:150px 1fr auto;gap:16px}
+      .brand img{width:145px}
+      .nav{gap:17px;font-size:.78rem}
+      .footer-grid{gap:4%}
+    }
+    @media(max-width:950px){
+      .location-section{padding:78px 0}
+      .location-heading{grid-template-columns:1fr;gap:23px}
+      .location-heading p{max-width:590px}
+      .location-layout{grid-template-columns:1fr 1fr}
+      .location-info{padding:27px}
+    }
+    @media(max-width:850px){
+      .wrap{width:min(100% - 36px,1320px)}
+      .head{display:flex;min-height:72px;justify-content:space-between}
+      .nav{position:absolute;top:100%;left:0;right:0;background:var(--black);color:#e9eee8;box-shadow:0 12px 20px #00000034;padding:18px 24px 25px;flex-direction:column;gap:0;align-items:stretch;
+        visibility:hidden;opacity:0;transform:translateY(-10px);transition:opacity .3s,transform .4s var(--ease-out),visibility 0s .4s}
+      .nav.is-open{visibility:visible;opacity:1;transform:none;transition:opacity .3s,transform .4s var(--ease-out),visibility 0s}
+      .nav a{display:block;padding:12px 0;border-bottom:1px solid #3a453a;font-size:.96rem}
+      .nav a::after{display:none}
+      .nav.is-open a{animation:fade-up .5s var(--ease-out) both}
+      .nav.is-open a:nth-child(2){animation-delay:.04s}
+      .nav.is-open a:nth-child(3){animation-delay:.08s}
+      .nav.is-open a:nth-child(4){animation-delay:.12s}
+      .nav.is-open a:nth-child(5){animation-delay:.16s}
+      .nav.is-open a:nth-child(6){animation-delay:.2s}
+      .header-actions{margin-left:auto}
+      .menu-toggle{display:block}
+
+      .hero,.hero-inner{min-height:650px}
+      .hero-inner{padding-top:65px;padding-bottom:55px}
+      .hero h1{font-size:clamp(3.9rem,7.5vw,6rem)}
+
+      .intro,.plans,.schedule{padding:75px 0}
+      .experience{padding:82px 0}
+      .intro-grid,.plan-layout,.booking-head,.experience-grid{grid-template-columns:1fr;gap:30px}
+      .experience-grid{gap:35px}
+      .intro-main h2,.plan-intro h2,.booking-head h2{font-size:clamp(3.3rem,7vw,5rem);margin-bottom:24px}
+      .experience-head h2{margin:25px 0 24px}
+      .real-image{max-width:700px}
+      .real-image img{height:350px}
+      .plan-intro p{max-width:600px}
+      .booking-head{margin-bottom:32px;gap:22px}
+      .schedule-form{grid-template-columns:1fr 1fr}
+      .booking-field:nth-child(2){padding-right:0}
+      .booking-field:nth-child(3){grid-column:1/-1;border-left:0;border-top:1px solid #d4dbd2;padding-left:0}
+
+      .footer-grid{grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+      .footer-about{grid-row:span 2}
+    }
+    @media(max-width:680px){
+      .location-section{padding:70px 0}
+      .location-heading h2{font-size:clamp(2.9rem,10vw,4.3rem)}
+      .location-layout{grid-template-columns:1fr}
+      .location-map,.location-map iframe{min-height:300px;height:300px}
+      .location-info{padding:29px 25px 31px}
+    }
+    @media(max-width:600px){
+      .hero-bg{background-image:url('fotos-usar/hero-academia-900.webp')}
+      .brand img{width:145px}
+      .header-actions{gap:6px}
+      .header-actions .social-icon{width:34px;height:34px}
+
+      .hero,.hero-inner{min-height:620px}
+      .hero-inner{padding-top:55px;padding-bottom:65px}
+      .hero-title-desktop{display:none}
+      .hero-title-mobile{display:block}
+      .hero h1{font-size:clamp(2.65rem,11.1vw,4.2rem);line-height:1.16;margin:27px 0 24px}
+      .hero-copy{font-size:1.05rem;max-width:340px;margin-bottom:28px}
+      .hero .button{padding:17px 18px;gap:18px;font-size:.77rem}
+      .hero .eyebrow{font-size:.72rem}
+
+      .footer-grid{grid-template-columns:1fr 1fr;gap:35px 22px;padding-bottom:45px}
+      .footer-about{grid-column:1/-1;grid-row:auto}
+      .footer-column:last-child{grid-column:1/-1}
+      .footer-bottom{display:block;line-height:1.8}
+      .footer-bottom a{display:block;margin-top:4px}
+    }
+    @media(max-width:560px){
+      .ticker{padding:12px 0;font-size:1rem}
+      .ticker-item{margin:0 17px}
+      .intro-main h2,.plan-intro h2,.booking-head h2{font-size:clamp(2.7rem,10vw,4.1rem)}
+      .experience-head h2{font-size:clamp(2.7rem,10.3vw,4rem)}
+      .location-heading h2{font-size:clamp(2.65rem,9.1vw,3.8rem)}
+      .location-heading{margin-bottom:30px}
+      .intro-main p{font-size:1rem}
+      .real-image img{height:255px}
+      .plan-row.is-open{margin:12px -16px;padding:0 16px}
+      .plan-row.is-open .plan-detail{padding-left:0}
+      .plan-detail{padding:0 0 25px 55px}
+      .plan-detail a{white-space:normal}
+      .schedule-form{display:block}
+      .booking-field,.booking-field+.booking-field,.booking-field:nth-child(3){border-left:0;border-top:1px solid #d4dbd2;padding:24px 0}
+      .booking-field:first-child{border-top:0}
+      .booking-action{display:block}
+      .booking-action p{margin-bottom:16px}
+      .schedule-form .button{width:100%;min-width:0}
+    }
+    @media(max-width:480px){
+      .service-list{gap:0 12px}
+      .service-list span{font-size:.84rem;gap:8px}
+    }
+    @media(max-width:360px){
+      .hero h1{font-size:10.5vw}
+      .hero .button{font-size:.7rem}
+    }
+
+    /* Quem pede menos movimento no sistema não vê animações */
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .js [data-reveal],.js .split .ln>span,.js .real-image .img-frame,.js .real-image .img-frame img,.js .real-image::after,.js .feature::before,.js .feature:first-child::after{opacity:1;transform:none;clip-path:none}
+    }
+  </style>
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap head">
+      <a class="brand" href="#inicio" aria-label="Move On, início"><img src="fotos-usar/logo-move-on.webp" width="360" height="120" alt="Move On Personal Trainer Academia"></a>
+      <nav class="nav" id="site-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#experiencia">Diferenciais</a>
+        <a href="#planos">Objetivos</a>
+        <a href="#agendar">Aula experimental</a>
+        <a href="#localizacao">Localização</a>
+      </nav>
+      <div class="header-actions">
+        <a class="social-icon" href="https://www.instagram.com/moveon_penapolis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Move On"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor"/></svg></a>
+        <a class="social-icon" href="https://wa.me/5518997247783" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp da Move On"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.1 20 5.3 16.6A8.7 8.7 0 1 1 8 19.1Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.8 8.4c.2-.4.4-.5.7-.5h.7l.9 2c.1.3 0 .5-.2.7l-.6.6c.6 1.1 1.5 2 2.6 2.6l.6-.6c.2-.2.5-.3.7-.2l2 .9v.7c0 .3-.2.5-.5.7-.6.3-1.2.4-1.8.2a9.4 9.4 0 0 1-5.3-5.3c-.2-.6-.1-1.2.2-1.8Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></a>
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div>
+          <div class="eyebrow">Move On · Penápolis, SP</div>
+          <h1 class="display" aria-label="O seu próximo passo começa aqui.">
+            <span class="hero-title-desktop" aria-hidden="true">
+              <span class="line"><span>O SEU PRÓXIMO</span></span>
+              <span class="line accent"><span>PASSO COMEÇA</span></span>
+              <span class="line accent"><span>AQUI.</span></span>
+            </span>
+            <span class="hero-title-mobile" aria-hidden="true">
+              <span class="line"><span>O SEU</span></span>
+              <span class="line"><span>PRÓXIMO PASSO</span></span>
+              <span class="line accent"><span>COMEÇA AQUI.</span></span>
+            </span>
+          </h1>
+          <p class="hero-copy">Treine com acompanhamento personalizado para emagrecer, ganhar massa muscular ou cuidar da sua qualidade de vida.</p>
+          <a class="button" href="#agendar">Agendar aula experimental <b aria-hidden="true"><svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-label="Oferecemos: ambiente climatizado, personal trainer, nutricionista e médico">
+      <div class="ticker-track" aria-hidden="true">
+        <div class="ticker-group">
+          <span class="ticker-item">Ambiente climatizado</span><span class="ticker-separator">—</span>
+          <span class="ticker-item">Personal trainer</span><span class="ticker-separator">—</span>
+          <span class="ticker-item">Nutricionista</span><span class="ticker-separator">—</span>
+          <span class="ticker-item">Médico</span><span class="ticker-separator">—</span>
+        </div>
+        <div class="ticker-group">
+          <span class="ticker-item">Ambiente climatizado</span><span class="ticker-separator">—</span>
+          <span class="ticker-item">Personal trainer</span><span class="ticker-separator">—</span>
+          <span class="ticker-item">Nutricionista</span><span class="ticker-separator">—</span>
+          <span class="ticker-item">Médico</span><span class="ticker-separator">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 01 SOBRE -->
+    <section class="intro" id="sobre">
+      <div class="wrap intro-grid">
+        <div class="intro-main">
+          <div class="eyebrow section-label" data-reveal>01 / Quem somos</div>
+          <h2 class="display split">TREINO COM<br>ATENÇÃO A VOCÊ.</h2>
+          <p data-reveal>A Move On é um centro de saúde e treinamento personalizado em Penápolis. Aqui, cada treino considera seu objetivo, sua rotina e o seu momento de vida.</p>
+          <p data-reveal style="--d:.08s">Para começar, voltar a treinar ou seguir evoluindo com orientação de perto.</p>
+          <a class="line-link" href="#experiencia" data-reveal style="--d:.16s">Conheça nossos diferenciais <span aria-hidden="true"><svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+        <figure class="real-image" data-observe>
+          <div class="img-frame"><img src="fotos-usar/academia-ambiente.webp" alt="Ambiente ilustrativo de academia com equipamentos de musculação" loading="lazy"></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 02 DIFERENCIAIS -->
+    <section class="experience" id="experiencia">
+      <div class="wrap experience-grid">
+        <div class="experience-head">
+          <div class="eyebrow" data-reveal>02 / Nosso jeito de cuidar</div>
+          <h2 class="display split">SEU RITMO.<br><span class="hl">SUA EVOLUÇÃO.</span></h2>
+          <p data-reveal>Seu treino tem direção, em um ambiente climatizado e com profissionais para apoiar sua evolução.</p>
+          <div class="service-list" aria-label="O que oferecemos">
+            <span data-reveal style="--d:.05s">Ambiente climatizado</span>
+            <span data-reveal style="--d:.12s">Personal trainer</span>
+            <span data-reveal style="--d:.19s">Nutricionista</span>
+            <span data-reveal style="--d:.26s">Médico</span>
+          </div>
+        </div>
+        <div class="features">
+          <article class="feature" data-observe>
+            <span class="number" data-reveal>01</span>
+            <div data-reveal style="--d:.1s"><h3>Atendimento personalizado</h3><p>Um acompanhamento ajustado às suas necessidades, à sua rotina e à sua evolução.</p></div>
+          </article>
+          <article class="feature" data-observe style="--d:.12s">
+            <span class="number" data-reveal style="--d:.12s">02</span>
+            <div data-reveal style="--d:.22s"><h3>Emagrecimento e força</h3><p>Treinos orientados para emagrecer ou desenvolver massa muscular.</p></div>
+          </article>
+          <article class="feature" data-observe style="--d:.24s">
+            <span class="number" data-reveal style="--d:.24s">03</span>
+            <div data-reveal style="--d:.34s"><h3>Qualidade de vida</h3><p>Atenção às necessidades dos idosos para ganhar movimento e preservar a autonomia.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 OBJETIVOS -->
+    <section class="plans" id="planos">
+      <div class="plans-sticky">
+      <div class="wrap plan-layout">
+        <div class="plan-intro">
+          <div class="eyebrow section-label" data-reveal>03 / Seu objetivo</div>
+          <h2 class="display split">CADA PESSOA TEM<br>SEU CAMINHO.</h2>
+          <p data-reveal>Emagrecer, ganhar massa muscular ou viver com mais qualidade: escolha seu objetivo e converse com a equipe sobre o melhor caminho.</p>
+          <a class="line-link" href="#agendar" data-reveal style="--d:.08s">Conversar sobre os planos <span aria-hidden="true"><svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+        <div class="plan-list" data-reveal>
+          <div class="plan-row is-open">
+            <button class="plan-head" type="button" aria-expanded="true" aria-controls="plan-1"><span class="plan-number">01</span><span class="plan-name">Emagrecer</span><span class="plus" aria-hidden="true"></span></button>
+            <div class="plan-body" id="plan-1"><div class="plan-clip"><div class="plan-detail"><p>Construa uma rotina de treinos com orientação para o seu objetivo de emagrecimento.</p><a href="#agendar" class="goal-link" data-goal="Emagrecimento">Tenho esse objetivo <svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></div>
+          </div>
+          <div class="plan-row">
+            <button class="plan-head" type="button" aria-expanded="false" aria-controls="plan-2"><span class="plan-number">02</span><span class="plan-name">Ganhar massa muscular</span><span class="plus" aria-hidden="true"></span></button>
+            <div class="plan-body" id="plan-2"><div class="plan-clip"><div class="plan-detail"><p>Treine com orientação para desenvolver força e aumentar a massa muscular.</p><a href="#agendar" class="goal-link" data-goal="Ganho de massa muscular">Tenho esse objetivo <svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></div>
+          </div>
+          <div class="plan-row">
+            <button class="plan-head" type="button" aria-expanded="false" aria-controls="plan-3"><span class="plan-number">03</span><span class="plan-name">Viver com mais qualidade</span><span class="plus" aria-hidden="true"></span></button>
+            <div class="plan-body" id="plan-3"><div class="plan-clip"><div class="plan-detail"><p>Movimente-se com acompanhamento adequado ao seu momento de vida, inclusive na terceira idade.</p><a href="#agendar" class="goal-link" data-goal="Qualidade de vida">Tenho esse objetivo <svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></div>
+          </div>
+          <p class="plan-footnote">A equipe informa valores, modalidades e disponibilidade.</p>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- 04 AULA EXPERIMENTAL -->
+    <section class="schedule" id="agendar">
+      <div class="wrap">
+        <div class="booking-head">
+          <div>
+            <div class="eyebrow section-label" data-reveal>04 / Aula experimental</div>
+            <h2 class="display split">VAMOS MARCAR<br>SUA AULA?</h2>
+          </div>
+          <p data-reveal style="--d:.15s">Venha conhecer a Move On em uma aula experimental. Conte seu objetivo e quando você pode treinar; nossa equipe combina os detalhes pelo WhatsApp.</p>
+        </div>
+        <form class="schedule-form" id="interest-form" novalidate data-reveal>
+          <div class="booking-field">
+            <div class="form-step">01 <span>Objetivo</span><svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <label class="field-label" for="goal">O que você busca?</label>
+            <select id="goal" name="goal" required>
+              <option value="" selected disabled>Selecione uma opção</option>
+              <option>Emagrecimento</option>
+              <option>Ganho de massa muscular</option>
+              <option>Qualidade de vida</option>
+              <option>Conhecer a academia</option>
+            </select>
+          </div>
+          <fieldset class="booking-field" aria-labelledby="days-label">
+            <div class="form-step">02 <span>Disponibilidade</span><svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="field-label" id="days-label">Em quais dias você pode treinar?</div>
+            <div class="day-grid">
+              <label><input type="checkbox" name="day" value="Segunda"><span>Seg</span></label>
+              <label><input type="checkbox" name="day" value="Terça"><span>Ter</span></label>
+              <label><input type="checkbox" name="day" value="Quarta"><span>Qua</span></label>
+              <label><input type="checkbox" name="day" value="Quinta"><span>Qui</span></label>
+              <label><input type="checkbox" name="day" value="Sexta"><span>Sex</span></label>
+              <label><input type="checkbox" name="day" value="Sábado"><span>Sáb</span></label>
+            </div>
+          </fieldset>
+          <div class="booking-field">
+            <div class="form-step">03 <span>Período</span><svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <label class="field-label" for="period">Qual horário é melhor?</label>
+            <select id="period" name="period" required>
+              <option value="" selected disabled>Selecione um período</option>
+              <option>Manhã</option>
+              <option>Tarde</option>
+              <option>Noite</option>
+              <option>Horário flexível</option>
+            </select>
+          </div>
+          <div class="booking-action">
+            <p id="form-msg" aria-live="polite">Sua mensagem será preparada para você confirmar a aula com nossa equipe.</p>
+            <button class="button" type="submit">Conversar no WhatsApp <b aria-hidden="true"><svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b></button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 05 LOCALIZAÇÃO -->
+    <section class="location-section" id="localizacao" aria-labelledby="location-title">
+      <div class="wrap">
+        <div class="location-heading">
+          <div>
+            <div class="eyebrow section-label" data-reveal>05 / Onde estamos</div>
+            <h2 class="display split" id="location-title">SEU PRÓXIMO<br>TREINO É AQUI.</h2>
+          </div>
+          <p data-reveal style="--d:.15s">Estamos na Vila Martins, em Penápolis. Confira os horários de funcionamento e veja como chegar.</p>
+        </div>
+        <div class="location-layout" data-reveal>
+          <div class="location-map">
+            <iframe title="Mapa da Move On Penápolis na Rua Altino Vaz de Mello, 1067" src="https://www.google.com/maps?q=Rua+Altino+Vaz+de+Mello%2C+1067%2C+Vila+Martins%2C+Pen%C3%A1polis%2C+SP&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+          <div class="location-info">
+            <div class="location-address">
+              <span class="location-kicker">NOSSO ENDEREÇO</span>
+              <address>Rua Altino Vaz de Mello, 1067<br>Vila Martins · Penápolis/SP<br>CEP 16300-037</address>
+              <a class="location-route" href="https://maps.app.goo.gl/YKCsW4hzYb3TUBop8" target="_blank" rel="noopener noreferrer">Traçar rota no Google Maps <span aria-hidden="true"><svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4.5 15.5 15 5M6.5 5H15v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            </div>
+            <div class="location-hours">
+              <div class="hours-head">
+                <h3>Horários de funcionamento</h3>
+                <span class="hours-status" hidden></span>
+              </div>
+              <!-- data-day: 0 = domingo … 6 = sábado. Para mudar um horário, mude o texto e o data-hours -->
+              <dl>
+                <div data-day="1" data-hours="05:00-21:00"><dt>Segunda-feira</dt><dd>05:00–21:00</dd></div>
+                <div data-day="2" data-hours="05:00-21:00"><dt>Terça-feira</dt><dd>05:00–21:00</dd></div>
+                <div data-day="3" data-hours="06:00-20:00"><dt>Quarta-feira</dt><dd>06:00–20:00</dd></div>
+                <div data-day="4" data-hours="05:00-21:00"><dt>Quinta-feira</dt><dd>05:00–21:00</dd></div>
+                <div data-day="5" data-hours="05:00-19:00"><dt>Sexta-feira</dt><dd>05:00–19:00</dd></div>
+                <div data-day="6" data-hours=""><dt>Sábado</dt><dd>Fechado</dd></div>
+                <div data-day="0" data-hours=""><dt>Domingo</dt><dd>Fechado</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="brand" href="#inicio" aria-label="Move On, início"><img src="fotos-usar/logo-move-on.webp" width="360" height="120" alt="Move On Personal Trainer Academia" loading="lazy"></a>
+          <p>Centro de saúde e treinamento personalizado em Penápolis/SP.</p>
+          <div class="footer-social">
+            <a class="social-icon" href="https://www.instagram.com/moveon_penapolis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Move On"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor"/></svg></a>
+            <a class="social-icon" href="https://wa.me/5518997247783" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp da Move On"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.1 20 5.3 16.6A8.7 8.7 0 1 1 8 19.1Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.8 8.4c.2-.4.4-.5.7-.5h.7l.9 2c.1.3 0 .5-.2.7l-.6.6c.6 1.1 1.5 2 2.6 2.6l.6-.6c.2-.2.5-.3.7-.2l2 .9v.7c0 .3-.2.5-.5.7-.6.3-1.2.4-1.8.2a9.4 9.4 0 0 1-5.3-5.3c-.2-.6-.1-1.2.2-1.8Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h2>Oferecemos</h2>
+          <ul><li>Ambiente climatizado</li><li>Personal trainer</li><li>Nutricionista</li><li>Médico</li></ul>
+        </div>
+        <div class="footer-column">
+          <h2>Navegação</h2>
+          <ul><li><a href="#inicio">Início</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#experiencia">Diferenciais</a></li><li><a href="#planos">Objetivos</a></li><li><a href="#agendar">Aula experimental</a></li><li><a href="#localizacao">Localização</a></li></ul>
+        </div>
+        <div class="footer-column">
+          <h2>Contato</h2>
+          <ul>
+            <li><a href="https://wa.me/5518997247783" target="_blank" rel="noopener noreferrer">(18) 99724-7783</a></li>
+            <li><a href="https://www.instagram.com/moveon_penapolis/" target="_blank" rel="noopener noreferrer">@moveon_penapolis</a></li>
+            <li>Rua Altino Vaz de Mello, 1067<br>Vila Martins · Penápolis/SP<br>CEP 16300-037</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Move On Penápolis</span>
+        <a href="#inicio">Voltar ao topo <svg class="link-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 16V4m0 0L5.5 8.5M10 4l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const WHATSAPP = '5518997247783';
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ---------- Menu mobile ---------- */
+    const menu = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#site-nav');
+    function setMenu(open) {
+      nav.classList.toggle('is-open', open);
+      menu.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    }
+    menu.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+    /* ---------- Faixa verde: loop sem buraco em qualquer largura de tela ---------- */
+    // Repete as palavras até cobrir a tela e duplica o conjunto; a animação anda
+    // exatamente metade da faixa, então o fim encaixa no começo sem corte.
+    const tickerTrack = document.querySelector('.ticker-track');
+    const tickerGroup = tickerTrack.querySelector('.ticker-group').cloneNode(true);
+    function buildTicker() {
+      tickerTrack.innerHTML = '';
+      tickerTrack.appendChild(tickerGroup.cloneNode(true));
+      const groupW = tickerTrack.firstElementChild.offsetWidth;
+      const perHalf = Math.max(1, Math.ceil(window.innerWidth / groupW));
+      const total = perHalf * 2;
+      for (let i = 1; i < total; i++) tickerTrack.appendChild(tickerGroup.cloneNode(true));
+      // mesma velocidade em qualquer tela (~35px por segundo, igual ao original)
+      tickerTrack.style.setProperty('--ticker-dur', (groupW * perHalf / 35) + 's');
+    }
+    let tickerW = 0;
+    const rebuildTicker = () => { if (window.innerWidth !== tickerW) { tickerW = window.innerWidth; buildTicker(); } };
+    rebuildTicker();
+    window.addEventListener('resize', rebuildTicker);
+    if (document.fonts) document.fonts.ready.then(buildTicker);
+
+    /* ---------- Horários: destaca hoje e mostra se está aberto agora ---------- */
+    // Usa o horário de Brasília, mesmo que a pessoa esteja em outro fuso
+    const DAY_NAMES = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const hourRows = [...document.querySelectorAll('.location-hours [data-day]')];
+    const hoursStatus = document.querySelector('.hours-status');
+    const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+    const scheduleOf = day => {
+      const row = hourRows.find(r => Number(r.dataset.day) === day);
+      if (!row || !row.dataset.hours) return null;
+      const [open, close] = row.dataset.hours.split('-');
+      return { open, close };
+    };
+    function nowInBrasilia() {
+      const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+        .formatToParts(new Date()).reduce((o, p) => (o[p.type] = p.value, o), {});
+      const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday);
+      return { day, min: Number(parts.hour) * 60 + Number(parts.minute) };
+    }
+    function updateHours() {
+      const { day, min } = nowInBrasilia();
+      hourRows.forEach(r => r.classList.toggle('is-today', Number(r.dataset.day) === day));
+
+      const today = scheduleOf(day);
+      let text, open = false;
+      if (today && min >= toMin(today.open) && min < toMin(today.close)) {
+        open = true;
+        text = `Aberto agora · fecha às ${today.close}`;
+      } else if (today && min < toMin(today.open)) {
+        text = `Fechado · abre hoje às ${today.open}`;
+      } else {
+        // procura o próximo dia com horário
+        for (let i = 1; i <= 7; i++) {
+          const d = (day + i) % 7, s = scheduleOf(d);
+          if (s) { text = `Fechado · abre ${i === 1 ? 'amanhã' : DAY_NAMES[d]} às ${s.open}`; break; }
+        }
+      }
+      hoursStatus.textContent = text;
+      hoursStatus.classList.toggle('is-open', open);
+      hoursStatus.hidden = !text;
+    }
+    updateHours();
+    setInterval(updateHours, 60000);
+
+    /* ---------- Barra fixa: ganha sombra ao rolar ---------- */
+    const header = document.querySelector('.site-header');
+    const onScrollHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 10);
+    window.addEventListener('scroll', onScrollHeader, { passive: true });
+    onScrollHeader();
+
+    /* ---------- Link ativo no menu conforme a seção ---------- */
+    const navLinks = [...nav.querySelectorAll('a')];
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section[id]').forEach(s => sectionObserver.observe(s));
+
+    /* ---------- Títulos: quebra em linhas para a máscara ---------- */
+    document.querySelectorAll('.split').forEach(title => {
+      const lines = title.innerHTML.split(/<br\s*\/?>/i);
+      title.innerHTML = lines.map((html, i) =>
+        `<span class="ln" style="--i:${i}"><span>${html.trim()}</span></span>`).join('');
+    });
+
+    /* ---------- Revelar ao rolar ---------- */
+    const targets = document.querySelectorAll('[data-reveal], .split, [data-observe]');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      targets.forEach(el => el.classList.add('is-in'));
+    } else {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      targets.forEach(el => io.observe(el));
+    }
+
+    /* ---------- Parallax leve no fundo do hero ---------- */
+    const heroBg = document.querySelector('.hero-bg');
+    if (!reduceMotion && heroBg) {
+      let ticking = false;
+      heroBg.addEventListener('animationend', () => {
+        heroBg.style.animation = 'none';
+        window.addEventListener('scroll', () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            const y = Math.min(window.scrollY, 900);
+            heroBg.style.transform = `translate3d(0, ${y * 0.25}px, 0) scale(${1 + y * 0.0002})`;
+            ticking = false;
+          });
+        }, { passive: true });
+      }, { once: true });
+    }
+
+    /* ---------- Objetivos: os cards abrem conforme a página desce ---------- */
+    // No computador a seção "gruda" na tela e cada trecho de rolagem abre o próximo card.
+    // No celular (ou tela baixa) ela rola normal e o card muda conforme a lista passa pelo meio da tela.
+    const plansSection = document.querySelector('#planos');
+    const plansSticky = plansSection.querySelector('.plans-sticky');
+    const planList = plansSection.querySelector('.plan-list');
+    const planRows = [...plansSection.querySelectorAll('.plan-row')];
+    const planDetails = planRows.map(r => r.querySelector('.plan-detail'));
+    const pinQuery = window.matchMedia('(min-width: 851px) and (min-height: 700px)');
+    let pinned = false;
+    let current = -1;
+
+    function setOpen(index) {
+      if (index === current) return;
+      current = index;
+      planRows.forEach((row, i) => {
+        row.classList.toggle('is-open', i === index);
+        row.querySelector('.plan-head').setAttribute('aria-expanded', String(i === index));
+      });
+    }
+    // Todos os textos com a mesma altura: a lista não muda de tamanho ao trocar de card
+    function equalizePlans() {
+      planDetails.forEach(d => d.style.minHeight = '');
+      const max = Math.max(...planDetails.map(d => d.offsetHeight));
+      planDetails.forEach(d => d.style.minHeight = max + 'px');
+    }
+    const headerH = () => document.querySelector('.site-header').offsetHeight;
+
+    function plansProgress() {
+      const rect = plansSection.getBoundingClientRect();
+      if (pinned) {
+        const range = plansSection.offsetHeight - plansSticky.offsetHeight;
+        return (headerH() - rect.top) / range;
+      }
+      // sem fixar: a lista vai de 85% até 25% da altura da tela enquanto os cards trocam
+      const list = planList.getBoundingClientRect();
+      return (window.innerHeight * 0.85 - list.top) / (window.innerHeight * 0.6);
+    }
+    function updatePlans() {
+      const p = Math.min(Math.max(plansProgress(), 0), 0.999);
+      planList.style.setProperty('--p', p);
+      setOpen(Math.floor(p * planRows.length));
+    }
+    function setupPlans() {
+      pinned = pinQuery.matches && !reduceMotion;
+      plansSection.classList.toggle('is-pinned', pinned);
+      equalizePlans();
+      updatePlans();
+    }
+
+    let plansTicking = false;
+    window.addEventListener('scroll', () => {
+      if (plansTicking) return;
+      plansTicking = true;
+      requestAnimationFrame(() => { updatePlans(); plansTicking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', setupPlans);
+    if (document.fonts) document.fonts.ready.then(setupPlans);
+    setupPlans();
+
+    // Clicar num card rola até o trecho dele (assim clique e rolagem nunca brigam)
+    planRows.forEach((row, i) => {
+      row.querySelector('.plan-head').addEventListener('click', () => {
+        const top = window.scrollY + plansSection.getBoundingClientRect().top;
+        let y;
+        if (pinned) {
+          const range = plansSection.offsetHeight - plansSticky.offsetHeight;
+          y = top - headerH() + range * (i + 0.5) / planRows.length;
+        } else {
+          const list = planList.getBoundingClientRect();
+          y = window.scrollY + list.top - window.innerHeight * (0.85 - 0.6 * (i + 0.5) / planRows.length);
+        }
+        window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    });
+
+    /* ---------- Formulário → WhatsApp ---------- */
+    const form = document.querySelector('#interest-form');
+    const goal = form.querySelector('#goal');
+    const period = form.querySelector('#period');
+    const dayGrid = form.querySelector('.day-grid');
+    const msg = form.querySelector('#form-msg');
+    const defaultMsg = msg.textContent;
+    const fields = form.querySelectorAll('.booking-field');
+
+    function updateSteps() {
+      fields[0].classList.toggle('is-done', !!goal.value);
+      fields[1].classList.toggle('is-done', !!form.querySelector('input[name="day"]:checked'));
+      fields[2].classList.toggle('is-done', !!period.value);
+    }
+    form.addEventListener('change', () => {
+      updateSteps();
+      msg.textContent = defaultMsg;
+      msg.classList.remove('is-error');
+    });
+
+    // "Tenho esse objetivo" já preenche o formulário
+    document.querySelectorAll('.goal-link').forEach(link => link.addEventListener('click', () => {
+      goal.value = link.dataset.goal;
+      updateSteps();
+    }));
+
+    function showError(text, el) {
+      msg.textContent = text;
+      msg.classList.add('is-error');
+      if (el === dayGrid && !reduceMotion) {
+        dayGrid.classList.remove('shake');
+        void dayGrid.offsetWidth;
+        dayGrid.classList.add('shake');
+      }
+      (el === dayGrid ? dayGrid.querySelector('input') : el).focus();
+    }
+
+    // "Segunda, Quarta e Sexta"
+    const listDays = d => d.length > 1 ? d.slice(0, -1).join(', ') + ' e ' + d[d.length - 1] : d[0];
+    // "no período da manhã" / "com horário flexível"
+    const periodText = p => p === 'Horário flexível' ? 'com horário flexível' : `no período da ${p.toLowerCase()}`;
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const days = [...form.querySelectorAll('input[name="day"]:checked')].map(i => i.value);
+      if (!goal.value) return showError('Escolha o seu objetivo.', goal);
+      if (!days.length) return showError('Escolha pelo menos um dia em que você pode treinar.', dayGrid);
+      if (!period.value) return showError('Escolha o melhor período para você.', period);
+
+      const message = `Olá, Move On! Gostaria de agendar uma aula experimental. Meu objetivo é ${goal.value.toLowerCase()}. Tenho disponibilidade ${listDays(days)} ${periodText(period.value)}. Podemos conversar?`;
+      const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+      const opened = window.open(url, '_blank');
+      if (!opened) window.location.href = url;
+    });
+  })();
+  </script>
+</body>
+</html>
