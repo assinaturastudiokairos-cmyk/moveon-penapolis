@@ -82,6 +82,11 @@
     .header-actions{display:flex;align-items:center;gap:10px}
     .site-header .social-icon{border-color:#808b80;color:#f1f5ef}
     .site-header .social-icon:hover{background:#fff;color:var(--black)}
+    /* Botão X do menu: só existe no mobile; mesmo estilo dos ícones sociais */
+    .nav-close{display:none;width:38px;height:38px;padding:0;border:1px solid #808b80;border-radius:50%;background:transparent;color:#f1f5ef;cursor:pointer;align-items:center;justify-content:center;transition:background .25s,color .25s,transform .35s var(--ease-out)}
+    .nav-close:hover{background:#fff;color:var(--black);transform:rotate(90deg)}
+    .nav-close:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+    .nav-close svg{width:19px;height:19px;display:block}
     .menu-toggle{display:none;border:0;background:transparent;width:39px;height:39px;padding:8px;cursor:pointer}
     .menu-toggle span{display:block;height:2px;width:22px;background:#fff;margin:5px 0;transition:transform .35s var(--ease-out),opacity .2s}
     .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -166,6 +171,10 @@
     /* Fixada: a seção fica parada na tela enquanto a rolagem abre um card de cada vez */
     .plans.is-pinned{padding:0;height:calc(100vh - 82px + 180vh)}
     .plans.is-pinned .plans-sticky{position:sticky;top:82px;height:calc(100vh - 82px);display:flex;align-items:center;overflow:hidden}
+    /* Celular: só a lista fica fixa; o trecho de rolagem vem da "pista" (altura calculada no JS) */
+    .plans-track{display:none}
+    .plans.is-stepped .plans-track{display:block;grid-row:2;grid-column:1;height:var(--track-h);pointer-events:none}
+    .plans.is-stepped .plan-list{grid-row:2;grid-column:1;align-self:start;position:sticky;top:var(--stick-top)}
     .plan-list{position:relative}
     .plan-list::before{content:"";position:absolute;left:0;top:-1px;height:2px;width:calc(var(--p,0) * 100%);background:var(--green);transition:width .15s linear}
     .plan-intro h2{font-size:clamp(2.6rem,3.4vw,4.4rem);margin:28px 0 30px}
@@ -360,6 +369,7 @@
       .nav.is-open{visibility:visible;opacity:1;transform:none;transition:opacity .3s,transform .4s var(--ease-out),visibility 0s}
       .nav a{display:block;padding:12px 0;border-bottom:1px solid #3a453a;font-size:.96rem}
       .nav a::after{display:none}
+      .nav-close{display:inline-flex;position:absolute;top:10px;right:16px}
       .nav.is-open a{animation:fade-up .5s var(--ease-out) both}
       .nav.is-open a:nth-child(2){animation-delay:.04s}
       .nav.is-open a:nth-child(3){animation-delay:.08s}
@@ -467,6 +477,7 @@
         <a href="#planos">Objetivos</a>
         <a href="#agendar">Aula experimental</a>
         <a href="#localizacao">Localização</a>
+        <button class="nav-close" type="button" aria-label="Fechar menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       </nav>
       <div class="header-actions">
         <a class="social-icon" href="https://www.instagram.com/moveon_penapolis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Move On"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor"/></svg></a>
@@ -591,6 +602,7 @@
           </div>
           <p class="plan-footnote">A equipe informa valores, modalidades e disponibilidade.</p>
         </div>
+        <div class="plans-track" aria-hidden="true"></div>
       </div>
       </div>
     </section>
@@ -735,14 +747,18 @@
     /* ---------- Menu mobile ---------- */
     const menu = document.querySelector('.menu-toggle');
     const nav = document.querySelector('#site-nav');
-    function setMenu(open) {
+    function setMenu(open, returnFocus) {
       nav.classList.toggle('is-open', open);
       menu.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      if (!open && returnFocus) menu.focus();
     }
     menu.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    nav.querySelector('.nav-close').addEventListener('click', () => setMenu(false, true));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) setMenu(false, true);
+    });
 
     /* ---------- Faixa verde: loop sem buraco em qualquer largura de tela ---------- */
     // Repete as palavras até cobrir a tela e duplica o conjunto; a animação anda
@@ -866,15 +882,19 @@
     }
 
     /* ---------- Objetivos: os cards abrem conforme a página desce ---------- */
-    // No computador a seção "gruda" na tela e cada trecho de rolagem abre o próximo card.
-    // No celular (ou tela baixa) ela rola normal e o card muda conforme a lista passa pelo meio da tela.
+    // Computador: a seção inteira fica fixa na tela e cada trecho de rolagem abre o próximo card.
+    // Celular: só a lista fica fixa (o título rola embora) e cada card ganha meia tela de rolagem.
+    // Sem espaço para fixar (tela muito baixa) ou com "menos movimento": rola normal, sem fixar.
     const plansSection = document.querySelector('#planos');
     const plansSticky = plansSection.querySelector('.plans-sticky');
+    const plansTrack = plansSection.querySelector('.plans-track');
     const planList = plansSection.querySelector('.plan-list');
     const planRows = [...plansSection.querySelectorAll('.plan-row')];
     const planDetails = planRows.map(r => r.querySelector('.plan-detail'));
     const pinQuery = window.matchMedia('(min-width: 851px) and (min-height: 700px)');
-    let pinned = false;
+    const STEP_VH = 0.5;      // rolagem por card no celular (50% da altura da tela)
+    let mode = 'free';        // 'desk' | 'step' | 'free'
+    let stickTop = 0, stepRange = 0;
     let current = -1;
 
     function setOpen(index) {
@@ -894,10 +914,12 @@
     const headerH = () => document.querySelector('.site-header').offsetHeight;
 
     function plansProgress() {
-      const rect = plansSection.getBoundingClientRect();
-      if (pinned) {
+      if (mode === 'desk') {
         const range = plansSection.offsetHeight - plansSticky.offsetHeight;
-        return (headerH() - rect.top) / range;
+        return (headerH() - plansSection.getBoundingClientRect().top) / range;
+      }
+      if (mode === 'step') {
+        return (stickTop - plansTrack.getBoundingClientRect().top) / stepRange;
       }
       // sem fixar: a lista vai de 85% até 25% da altura da tela enquanto os cards trocam
       const list = planList.getBoundingClientRect();
@@ -909,9 +931,26 @@
       setOpen(Math.floor(p * planRows.length));
     }
     function setupPlans() {
-      pinned = pinQuery.matches && !reduceMotion;
-      plansSection.classList.toggle('is-pinned', pinned);
+      plansSection.classList.remove('is-pinned', 'is-stepped');
       equalizePlans();
+      mode = 'free';
+      if (!reduceMotion) {
+        if (pinQuery.matches) {
+          mode = 'desk';
+        } else {
+          // celular: só fixa a lista se ela couber na tela abaixo da barra de cima
+          stickTop = headerH() + 12;
+          const listH = planList.offsetHeight;
+          if (listH + stickTop + 16 <= window.innerHeight) {
+            mode = 'step';
+            stepRange = Math.round(window.innerHeight * STEP_VH) * planRows.length;
+            plansSection.style.setProperty('--stick-top', stickTop + 'px');
+            plansSection.style.setProperty('--track-h', (listH + stepRange) + 'px');
+          }
+        }
+      }
+      plansSection.classList.toggle('is-pinned', mode === 'desk');
+      plansSection.classList.toggle('is-stepped', mode === 'step');
       updatePlans();
     }
 
@@ -921,21 +960,32 @@
       plansTicking = true;
       requestAnimationFrame(() => { updatePlans(); plansTicking = false; });
     }, { passive: true });
-    window.addEventListener('resize', setupPlans);
+    // No celular a barra de endereço do navegador some e volta ao rolar e dispara "resize".
+    // Só refaz as medidas se a largura mudou ou a altura mudou bastante (girar o aparelho, por exemplo).
+    let lastW = window.innerWidth, lastH = window.innerHeight;
+    window.addEventListener('resize', () => {
+      if (window.innerWidth === lastW && Math.abs(window.innerHeight - lastH) < 150) return;
+      lastW = window.innerWidth; lastH = window.innerHeight;
+      setupPlans();
+    });
     if (document.fonts) document.fonts.ready.then(setupPlans);
     setupPlans();
 
     // Clicar num card rola até o trecho dele (assim clique e rolagem nunca brigam)
     planRows.forEach((row, i) => {
       row.querySelector('.plan-head').addEventListener('click', () => {
-        const top = window.scrollY + plansSection.getBoundingClientRect().top;
+        const n = planRows.length;
         let y;
-        if (pinned) {
+        if (mode === 'desk') {
+          const top = window.scrollY + plansSection.getBoundingClientRect().top;
           const range = plansSection.offsetHeight - plansSticky.offsetHeight;
-          y = top - headerH() + range * (i + 0.5) / planRows.length;
+          y = top - headerH() + range * (i + 0.5) / n;
+        } else if (mode === 'step') {
+          const trackTop = window.scrollY + plansTrack.getBoundingClientRect().top;
+          y = trackTop - stickTop + stepRange * (i + 0.5) / n;
         } else {
           const list = planList.getBoundingClientRect();
-          y = window.scrollY + list.top - window.innerHeight * (0.85 - 0.6 * (i + 0.5) / planRows.length);
+          y = window.scrollY + list.top - window.innerHeight * (0.85 - 0.6 * (i + 0.5) / n);
         }
         window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
       });
